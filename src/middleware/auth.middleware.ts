@@ -4,11 +4,12 @@ import config from '../config';
 /**
  * Middleware to verify API key for internal service authentication
  */
-export const apiKeyAuth = (req: Request, res: Response, next: NextFunction) => {
+export const apiKeyAuth = (req: Request, res: Response, next: NextFunction): void => {
   const apiKey = req.headers['x-api-key'];
   
   if (!apiKey || apiKey !== config.apiKey) {
-    return res.status(401).json({ error: 'Unauthorized: Invalid API key' });
+    res.status(401).json({ error: 'Unauthorized: Invalid API key' });
+    return;
   }
   
   next();

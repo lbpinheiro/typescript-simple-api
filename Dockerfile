@@ -35,6 +35,9 @@ RUN pnpm install --prod
 # Copy built files from builder stage
 COPY --from=builder /app/dist ./dist
 
+# Copy .env file
+COPY .env* ./
+
 # Expose the port the app runs on
 EXPOSE 3000
 
